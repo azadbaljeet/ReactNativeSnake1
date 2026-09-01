@@ -6,6 +6,7 @@ import { useSnakeGame } from "./src/hooks/useSnakeGame";
 import ScoreBar from "./src/components/ScoreBar";
 import GameBoard from "./src/components/GameBoard";
 import DPad from "./src/components/DPad";
+import RestartButton from "./src/components/RestartButton";
 
 export default function App() {
   const { cols, rows, boardWidth, boardHeight } = useBoardDimensions();
@@ -25,7 +26,10 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.phone}>
-        <Text style={styles.brand}>SNAKE</Text>
+        <View style={[styles.headerRow, { width: boardWidth + 22 }]}>
+          <Text style={styles.brand}>SNAKE</Text>
+          <RestartButton onPress={restart} />
+        </View>
 
         <ScoreBar
           score={score}
@@ -68,12 +72,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 24,
   },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
+  },
   brand: {
     color: COLORS.bezelText,
     fontSize: 14,
     fontWeight: "700",
     letterSpacing: 4,
-    marginBottom: 14,
   },
   hint: {
     color: "#6b6b6b",
